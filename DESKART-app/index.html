@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DESKART - Social Media Management & SEO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      perspective: 1000px;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0); /* lighter professional background */
+    }
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    /* 3D layered background shapes in hero */
+    .hero-bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    .shape1 {
+      width: 300px;
+      height: 300px;
+      background: #1e3a8a; /* navy blue */
+      top: -100px;
+      left: -100px;
+      transform: translateZ(0);
+      z-index: -1;
+    }
+    .shape2 {
+      width: 200px;
+      height: 200px;
+      background: #2563eb; /* blue */
+      top: 50px;
+      right: -50px;
+      transform: translateZ(-50px);
+      z-index: -1;
+    }
+    .shape3 {
+      width: 250px;
+      height: 250px;
+      background: #3b82f6; /* lighter blue */
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(-30px);
+      z-index: -1;
+    }
+    /* 3D card hover effect */
+    .service-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .service-card:hover {
+      transform: translateY(-15px) translateZ(30px) rotateX(10deg) rotateY(10deg);
+      box-shadow: 0 20px 30px rgba(30, 58, 138, 0.5); /* navy shadow */
+      z-index: 10;
+    }
+    /* 3D button hover effect */
+    .btn-3d {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .btn-3d:hover {
+      transform: translateZ(10px) translateY(-3px);
+      box-shadow: 0 10px 15px rgba(30, 58, 138, 0.6); /* navy shadow */
+    }
+    /* 3D modal animation */
+    .modal-content {
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      transform-origin: center center;
+      opacity: 0;
+      transform: translateZ(-100px) rotateX(15deg);
+    }
+    .modal-content.show {
+      opacity: 1;
+      transform: translateZ(0) rotateX(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-indigo-600">DESKART</h1>
+      <nav class="space-x-6 hidden md:flex">
+        <a href="#services" class="text-gray-700 hover:text-indigo-600 transition">Services</a>
+        <a href="#about" class="text-gray-700 hover:text-indigo-600 transition">About</a>
+        <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition">Contact</a>
+      </nav>
+      <button class="md:hidden text-indigo-600 focus:outline-none" id="menu-btn" aria-label="Toggle menu">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="hero" class="relative max-w-sm mx-auto px-6 py-16 text-center fade-in">
+    <div class="hero-bg-shape shape1"></div>
+    <div class="hero-bg-shape shape2"></div>
+    <div class="hero-bg-shape shape3"></div>
+    <h2 class="text-3xl font-extrabold mb-4">Grow Your Business with DESKART</h2>
+    <p class="text-base max-w-md mx-auto mb-8 text-gray-600">
+      Expert Social Media Management, SEO Ranking, and Google Map Listing to attract more customers and boost your online presence.
+    </p>
+    <button id="get-started-btn" class="btn-3d inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-indigo-700 transition">
+      Get Started Now
+    </button>
+    <div id="game-ball" class="absolute top-10 right-10 w-16 h-16 bg-indigo-500 rounded-full cursor-pointer"></div>
+  </main>
+  <div id="progress-container" class="w-64 h-4 bg-gray-300 rounded-full mx-auto mt-4 hidden">
+    <div id="progress-bar" class="h-4 bg-indigo-600 rounded-full w-0"></div>
+  </div>
+  <p id="fun-message" class="text-center mt-4 text-indigo-700 font-semibold text-lg"></p>
+  <script>
+    const ball = document.getElementById('game-ball');
+    const progressBar = document.getElementById('progress-bar');
+    const progressContainer = document.getElementById('progress-container');
+    const funMessage = document.getElementById('fun-message');
+
+    const funnyMessages = [
+      "You're on fire! Keep clicking!",
+      "Wow, you're a pro!",
+      "Adventure awaits, keep going!",
+      "You're making magic happen!",
+      "Click-tastic! Keep it up!",
+      "You're unstoppable!",
+      "Keep clicking, hero!",
+      "You're leveling up!",
+      "Almost there, don't stop!",
+      "Victory is near!"
+    ];
+
+    let progress = 0;
+    const maxProgress = 10;
+
+    function getRandomPosition() {
+      const x = Math.random() * (window.innerWidth - 64);
+      const y = Math.random() * (window.innerHeight - 64);
+      return { x, y };
+    }
+
+    function getRandomColor() {
+      const colors = ['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#d8b4fe'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function moveBall() {
+      const { x, y } = getRandomPosition();
+      ball.style.transform = `translate(${x}px, ${y}px)`;
+      ball.style.backgroundColor = getRandomColor();
+    }
+
+    ball.addEventListener('click', () => {
+      if (progress === 0) {
+        progressContainer.classList.remove('hidden');
+      }
+      progress++;
+      if (progress > maxProgress) {
+        progress = 0;
+        funMessage.textContent = "Congratulations! You've completed the adventure! 🎉";
+        progressBar.style.width = '100%';
+        setTimeout(() => {
+          funMessage.textContent = '';
+          progressBar.style.width = '0';
+          progressContainer.classList.add('hidden');
+          moveBall();
+        }, 4000);
+      } else {
+        funMessage.textContent = funnyMessages[Math.min(progress - 1, funnyMessages.length - 1)];
+        progressBar.style.width = `${(progress / maxProgress) * 100}%`;
+        moveBall();
+      }
+    });
+
+    setInterval(moveBall, 2000);
+
+    // Menu toggle and page navigation
+    if (!window.hasSetupEventListeners) {
+      const menuBtn = document.getElementById('menu-btn');
+      const nav = document.querySelector('nav');
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('hidden');
+      });
+
+      const getStartedBtn = document.getElementById('get-started-btn');
+      const hero = document.getElementById('hero');
+      const servicesSection = document.getElementById('services');
+      const contactSection = document.getElementById('contact');
+      const serviceCards = document.querySelectorAll('#services .service-card');
+
+      getStartedBtn.addEventListener('click', () => {
+        hero.classList.add('hidden');
+        servicesSection.classList.remove('hidden');
+        contactSection.classList.add('hidden');
+      });
+
+      serviceCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+          servicesSection.classList.add('hidden');
+          contactSection.classList.remove('hidden');
+        });
+      });
+
+      window.hasSetupEventListeners = true;
+    }
+  </script>
+  
+  <section id="services" class="bg-white py-16 hidden">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center mb-12 text-indigo-600">Our Packages & Prices</h3>
+      <div class="grid grid-cols-1 gap-8 max-w-md mx-auto">
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition cursor-pointer">
+          <h4 class="text-lg font-semibold mb-2">Standard Package</h4>
+          <p class="text-indigo-700 font-semibold text-lg mb-2">Starting at ₹10,000/month</p>
+          <ul class="list-disc list-inside text-gray-700 text-sm">
+            <li>Social Media Management</li>
+            <li>Basic SEO Ranking</li>
+            <li>Google Map Listing</li>
+          </ul>
+        </div>
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition cursor-pointer">
+          <h4 class="text-lg font-semibold mb-2">Premium Package</h4>
+          <p class="text-indigo-700 font-semibold text-lg mb-2">Starting at ₹18,000/month</p>
+          <ul class="list-disc list-inside text-gray-700 text-sm">
+            <li>Advanced Social Media Management</li>
+            <li>Improved SEO Ranking</li>
+            <li>Google Map Listing with Reviews</li>
+          </ul>
+        </div>
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition cursor-pointer">
+          <h4 class="text-lg font-semibold mb-2">Premium+ Package</h4>
+          <p class="text-indigo-700 font-semibold text-lg mb-2">Starting at ₹25,000/month</p>
+          <ul class="list-disc list-inside text-gray-700 text-sm">
+            <li>Full Social Media Management & Ads</li>
+            <li>Top SEO Ranking & Analytics</li>
+            <li>Google Map Listing with Reviews & Optimization</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-indigo-600 py-16 px-6 text-white text-center hidden">
+    <h3 class="text-3xl font-bold mb-6">Contact Us</h3>
+    <p class="mb-8 max-w-xl mx-auto">
+      Ready to take your business to the next level? Reach out to us today!
+    </p>
+    <p class="mb-4 text-lg font-semibold">
+      Owner: Raj Vishwakarma
+    </p>
+    <p class="mb-4 text-lg font-semibold">
+      Address: LALGANJ AJHARA PRATAPGARH UTTAR PRADESH 230132
+    </p>
+    <p class="mb-4 text-lg font-semibold">
+      WhatsApp Chat for Work:
+    </p>
+    <p class="mb-2">
+      <a href="https://wa.me/919235886279" target="_blank" class="underline hover:text-gray-300">+91 92358 86279</a>
+    </p>
+    <p class="mb-8">
+      <a href="https://wa.me/919118270147" target="_blank" class="underline hover:text-gray-300">+91 91182 70147</a>
+    </p>
+    <a href="mailto:contact@deskart.com" class="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+      Email Us
+    </a>
+    <p class="mt-4 text-sm italic">
+      Or email us at: <a href="mailto:shree0tech01@gmail.com" class="underline hover:text-gray-300">shree0tech01@gmail.com</a>
+    </p>
+  </section>
+
+  <!-- Modals for services -->
+  <div id="modal-social" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-social" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">Social Media Management</h4>
+      <p>
+        Our Social Media Management service helps you create engaging content, schedule posts, and interact with your audience to grow your brand presence effectively across platforms like Facebook, Instagram, Twitter, and LinkedIn.
+      </p>
+    </div>
+  </div>
+
+  <div id="modal-seo" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-seo" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">SEO Ranking</h4>
+      <p>
+        Our SEO Ranking service focuses on optimizing your website content, keywords, and backlinks to improve your search engine rankings, driving more organic traffic and potential customers to your business.
+      </p>
+    </div>
+  </div>
+
+  <div id="modal-map" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-map" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">Google Map Listing</h4>
+      <p>
+        Our Google Map Listing service ensures your business is accurately listed on Google Maps, increasing local visibility and helping customers find your physical location easily.
+      </p>
+    </div>
+  </div>
+  
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const nav = document.querySelector('nav');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+    });
+
+    const hero = document.getElementById('hero');
+    const getStartedBtn = document.getElementById('get-started-btn');
+    const servicesSection = document.getElementById('services');
+    const contactSection = document.getElementById('contact');
+    const serviceCards = document.querySelectorAll('#services .service-card');
+
+    getStartedBtn.addEventListener('click', () => {
+      hero.classList.add('hidden');
+      servicesSection.classList.remove('hidden');
+    });
+
+    serviceCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        servicesSection.classList.add('hidden');
+        contactSection.classList.remove('hidden');
+      });
+    });
+  </script>
+
+  <section id="services" class="bg-white py-16">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center mb-12 text-indigo-600">Our Services</h3>
+      <div class="grid grid-cols-1 gap-8 max-w-md mx-auto">
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition">
+          <i class="fas fa-bullhorn text-indigo-600 text-4xl mb-4"></i>
+          <h4 class="text-lg font-semibold mb-2">Social Media Management</h4>
+          <p class="text-gray-700 text-sm">
+            Manage your social media profiles with engaging content and grow your audience effectively.
+          </p>
+        </div>
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition">
+          <i class="fas fa-chart-line text-indigo-600 text-4xl mb-4"></i>
+          <h4 class="text-lg font-semibold mb-2">SEO Ranking</h4>
+          <p class="text-gray-700 text-sm">
+            Improve your website’s search engine ranking to attract more organic traffic and potential customers.
+          </p>
+        </div>
+        <div class="service-card bg-indigo-50 p-6 rounded-lg shadow transition">
+          <i class="fas fa-map-marker-alt text-indigo-600 text-4xl mb-4"></i>
+          <h4 class="text-lg font-semibold mb-2">Google Map Listing</h4>
+          <p class="text-gray-700 text-sm">
+            Get your business listed on Google Maps to increase local visibility and drive foot traffic.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-16 px-6 max-w-4xl mx-auto text-center">
+    <h3 class="text-3xl font-bold mb-6 text-indigo-600">About DESKART</h3>
+    <p class="text-gray-700 text-lg leading-relaxed">
+      DESKART is dedicated to helping businesses grow their online presence through expert social media management, SEO strategies, and local Google Map listings. Our goal is to attract more customers and increase your revenue by leveraging the power of digital marketing.
+    </p>
+  </section>
+
+    <section id="contact" class="bg-indigo-600 py-16 px-6 text-white text-center">
+    <h3 class="text-3xl font-bold mb-6">Contact Us</h3>
+    <p class="mb-8 max-w-xl mx-auto">
+      Ready to take your business to the next level? Reach out to us today!
+    </p>
+    <p class="mb-4 text-lg font-semibold">
+      WhatsApp Chat for Work:
+    </p>
+    <p class="mb-2">
+      <a href="https://wa.me/919235886279" target="_blank" class="underline hover:text-gray-300">+91 92358 86279</a>
+    </p>
+    <p class="mb-8">
+      <a href="https://wa.me/919118270147" target="_blank" class="underline hover:text-gray-300">+91 91182 70147</a>
+    </p>
+    <a href="mailto:contact@deskart.com" class="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+      Email Us
+    </a>
+    <p class="mt-4 text-sm italic">
+      Or email us at: <a href="mailto:shree0tech01@gmail.com" class="underline hover:text-gray-300">shree0tech01@gmail.com</a>
+    </p>
+  </section>
+
+  <!-- Modals for services -->
+  <div id="modal-social" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-social" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">Social Media Management</h4>
+      <p>
+        Our Social Media Management service helps you create engaging content, schedule posts, and interact with your audience to grow your brand presence effectively across platforms like Facebook, Instagram, Twitter, and LinkedIn.
+      </p>
+    </div>
+  </div>
+
+  <div id="modal-seo" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-seo" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">SEO Ranking</h4>
+      <p>
+        Our SEO Ranking service focuses on optimizing your website content, keywords, and backlinks to improve your search engine rankings, driving more organic traffic and potential customers to your business.
+      </p>
+    </div>
+  </div>
+
+  <div id="modal-map" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="modal-content bg-white rounded-lg max-w-lg p-6 relative shadow-lg">
+      <button id="close-map" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h4 class="text-2xl font-bold mb-4 text-indigo-600">Google Map Listing</h4>
+      <p>
+        Our Google Map Listing service ensures your business is accurately listed on Google Maps, increasing local visibility and helping customers find your physical location easily.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const nav = document.querySelector('nav');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+    });
+
+    // Modal functionality
+    const modalSocial = document.getElementById('modal-social');
+    const modalSEO = document.getElementById('modal-seo');
+    const modalMap = document.getElementById('modal-map');
+
+    const closeSocial = document.getElementById('close-social');
+    const closeSEO = document.getElementById('close-seo');
+    const closeMap = document.getElementById('close-map');
+
+    // Open modals on card click
+    document.querySelector('.service-card:nth-child(1)').addEventListener('click', () => {
+      modalSocial.classList.remove('hidden');
+      modalSocial.classList.add('flex');
+      setTimeout(() => {
+        modalSocial.querySelector('.modal-content').classList.add('show');
+      }, 10);
+    });
+    document.querySelector('.service-card:nth-child(2)').addEventListener('click', () => {
+      modalSEO.classList.remove('hidden');
+      modalSEO.classList.add('flex');
+      setTimeout(() => {
+        modalSEO.querySelector('.modal-content').classList.add('show');
+      }, 10);
+    });
+    document.querySelector('.service-card:nth-child(3)').addEventListener('click', () => {
+      modalMap.classList.remove('hidden');
+      modalMap.classList.add('flex');
+      setTimeout(() => {
+        modalMap.querySelector('.modal-content').classList.add('show');
+      }, 10);
+    });
+
+    // Close modals on close button click
+    closeSocial.addEventListener('click', () => {
+      modalSocial.querySelector('.modal-content').classList.remove('show');
+      setTimeout(() => {
+        modalSocial.classList.add('hidden');
+        modalSocial.classList.remove('flex');
+      }, 500);
+    });
+    closeSEO.addEventListener('click', () => {
+      modalSEO.querySelector('.modal-content').classList.remove('show');
+      setTimeout(() => {
+        modalSEO.classList.add('hidden');
+        modalSEO.classList.remove('flex');
+      }, 500);
+    });
+    closeMap.addEventListener('click', () => {
+      modalMap.querySelector('.modal-content').classList.remove('show');
+      setTimeout(() => {
+        modalMap.classList.add('hidden');
+        modalMap.classList.remove('flex');
+      }, 500);
+    });
+
+    // Close modals on clicking outside modal content
+    [modalSocial, modalSEO, modalMap].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.querySelector('.modal-content').classList.remove('show');
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+          }, 500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
