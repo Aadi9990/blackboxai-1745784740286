@@ -1,0 +1,383 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   SEO &amp; Social Media Management Platform
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow">
+   <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+     <img alt="Logo icon with SEO text in blue and white background" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/0c56d3a4-80aa-446a-c9aa-86f5febe0337.jpg" width="40"/>
+     <h1 class="text-2xl font-semibold text-blue-600">
+      BizRanker
+     </h1>
+    </div>
+    <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+     <a class="hover:text-blue-600 transition" href="#services">
+      Services
+     </a>
+     <a class="hover:text-blue-600 transition" href="#how-it-works">
+      How It Works
+     </a>
+     <a class="hover:text-blue-600 transition" href="#pricing">
+      Pricing
+     </a>
+     <a class="hover:text-blue-600 transition" href="#contact">
+      Contact
+     </a>
+    </nav>
+    <div class="md:hidden">
+     <button aria-label="Toggle menu" class="text-gray-700 focus:outline-none" id="menu-btn">
+      <i class="fas fa-bars fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <nav class="hidden md:hidden bg-white shadow-md" id="mobile-menu">
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-blue-50 transition" href="#services">
+     Services
+    </a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-blue-50 transition" href="#how-it-works">
+     How It Works
+    </a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-blue-50 transition" href="#pricing">
+     Pricing
+    </a>
+    <a class="block px-6 py-3 hover:bg-blue-50 transition" href="#contact">
+     Contact
+    </a>
+   </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="bg-white py-16 px-6 md:px-12 lg:px-24 flex flex-col-reverse md:flex-row items-center max-w-7xl mx-auto">
+   <div class="md:w-1/2 text-center md:text-left">
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">
+     Grow Your Business with Expert SEO &amp; Social Media Management
+    </h2>
+    <p class="text-gray-700 mb-6 leading-relaxed">
+     Get your business ranked higher on search engines and manage your social media effortlessly. Submit your project and let our experts handle the rest.
+    </p>
+    <a class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 transition" href="#submit-project">
+     Submit Your Project
+    </a>
+   </div>
+   <div class="md:w-1/2 mb-10 md:mb-0">
+    <img alt="Illustration showing a person managing SEO and social media on multiple devices with charts and graphs" class="w-full rounded-lg shadow-lg" height="400" src="https://storage.googleapis.com/a1aa/image/664db125-2f54-4fa2-8aa8-5ad0fb0e4ee0.jpg" width="600"/>
+   </div>
+  </section>
+  <!-- Services Section -->
+  <section class="bg-gray-100 py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto" id="services">
+   <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">
+    Our Services
+   </h3>
+   <div class="grid gap-10 md:grid-cols-3">
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center text-center">
+     <img alt="Icon representing SEO optimization with upward trending graph and magnifying glass" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/cca9d724-6fe4-40e2-09f7-19f3007b7e8c.jpg" width="100"/>
+     <h4 class="text-xl font-semibold mb-2">
+      SEO Ranking
+     </h4>
+     <p class="text-gray-600">
+      Improve your website’s visibility on Google and other search engines with our proven SEO strategies.
+     </p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center text-center">
+     <img alt="Icon representing social media management with multiple social media logos and a gear" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/5b79dd8c-43f4-477e-cabe-40247a4130b9.jpg" width="100"/>
+     <h4 class="text-xl font-semibold mb-2">
+      Social Media Management
+     </h4>
+     <p class="text-gray-600">
+      Manage your social media accounts professionally to engage your audience and grow your brand.
+     </p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center text-center">
+     <img alt="Icon representing analytics with charts, graphs, and data points" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/e43172fd-ab72-479b-4d96-9515536abc89.jpg" width="100"/>
+     <h4 class="text-xl font-semibold mb-2">
+      Performance Analytics
+     </h4>
+     <p class="text-gray-600">
+      Track your SEO and social media performance with detailed reports and insights.
+     </p>
+    </div>
+   </div>
+  </section>
+  <!-- How It Works Section -->
+  <section class="py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto" id="how-it-works">
+   <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">
+    How It Works
+   </h3>
+   <div class="grid gap-12 md:grid-cols-3">
+    <div class="flex flex-col items-center text-center">
+     <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-2xl font-bold">
+      1
+     </div>
+     <img alt="Illustration of a person submitting a project form on a laptop" class="mb-4 rounded-lg shadow" height="150" src="https://storage.googleapis.com/a1aa/image/33f266d4-5b02-4db4-305c-daea8b092abf.jpg" width="150"/>
+     <h4 class="text-xl font-semibold mb-2">
+      Submit Your Project
+     </h4>
+     <p class="text-gray-600 max-w-xs">
+      Fill out the form with your business details and requirements for SEO and social media management.
+     </p>
+    </div>
+    <div class="flex flex-col items-center text-center">
+     <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-2xl font-bold">
+      2
+     </div>
+     <img alt="Illustration of a team of experts analyzing data and planning strategy" class="mb-4 rounded-lg shadow" height="150" src="https://storage.googleapis.com/a1aa/image/a48382fc-17b6-4173-bfab-353e33f47c7b.jpg" width="150"/>
+     <h4 class="text-xl font-semibold mb-2">
+      Expert Review &amp; Strategy
+     </h4>
+     <p class="text-gray-600 max-w-xs">
+      Our experts analyze your project and create a customized SEO and social media strategy.
+     </p>
+    </div>
+    <div class="flex flex-col items-center text-center">
+     <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-2xl font-bold">
+      3
+     </div>
+     <img alt="Illustration of a person executing marketing tasks and generating reports on a computer" class="mb-4 rounded-lg shadow" height="150" src="https://storage.googleapis.com/a1aa/image/bd8b66b4-4876-442f-4e26-0c4fd4d5a7ce.jpg" width="150"/>
+     <h4 class="text-xl font-semibold mb-2">
+      Execution &amp; Reporting
+     </h4>
+     <p class="text-gray-600 max-w-xs">
+      We implement the strategy and provide you with regular performance reports and updates.
+     </p>
+    </div>
+   </div>
+  </section>
+  <!-- Submit Project Form -->
+  <section class="bg-white py-16 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto w-full" id="submit-project">
+   <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">
+    Submit Your Project
+   </h3>
+   <form action="#" class="bg-gray-50 p-8 rounded-lg shadow-md" method="POST">
+    <div class="grid gap-6 md:grid-cols-2">
+     <div>
+      <label class="block text-gray-700 font-semibold mb-2" for="name">
+       Full Name
+      </label>
+      <input class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="name" name="name" placeholder="Your full name" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-semibold mb-2" for="email">
+       Email Address
+      </label>
+      <input class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-semibold mb-2" for="phone">
+       Phone Number
+      </label>
+      <input class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="phone" name="phone" placeholder="+91 98765 43210" type="tel"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-semibold mb-2" for="business-name">
+       Business Name
+      </label>
+      <input class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="business-name" name="business-name" placeholder="Your business name" required="" type="text"/>
+     </div>
+    </div>
+    <div class="mt-6">
+     <label class="block text-gray-700 font-semibold mb-2" for="services">
+      Services Required
+     </label>
+     <select class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" id="services" multiple="" name="services" required="">
+      <option value="seo-ranking">
+       SEO Ranking
+      </option>
+      <option value="social-media-management">
+       Social Media Management
+      </option>
+      <option value="performance-analytics">
+       Performance Analytics
+      </option>
+     </select>
+     <p class="text-sm text-gray-500 mt-1">
+      Hold Ctrl (Cmd on Mac) to select multiple services
+     </p>
+    </div>
+    <div class="mt-6">
+     <label class="block text-gray-700 font-semibold mb-2" for="details">
+      Project Details
+     </label>
+     <textarea class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="details" name="details" placeholder="Describe your business and what you want to achieve" required="" rows="5"></textarea>
+    </div>
+    <div class="mt-8 text-center">
+     <button class="bg-blue-600 text-white px-10 py-3 rounded-md font-semibold hover:bg-blue-700 transition" type="submit">
+      Submit Project
+     </button>
+    </div>
+   </form>
+  </section>
+  <!-- Pricing Section -->
+  <section class="bg-gray-100 py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto" id="pricing">
+   <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">
+    Pricing Plans
+   </h3>
+   <div class="grid gap-10 md:grid-cols-3">
+    <div class="bg-white rounded-lg shadow p-8 flex flex-col">
+     <h4 class="text-2xl font-semibold mb-4 text-center">
+      Basic
+     </h4>
+     <p class="text-center text-gray-700 mb-6">
+      Ideal for small businesses starting out
+     </p>
+     <div class="text-center text-blue-600 font-extrabold text-4xl mb-6">
+      ₹5,000
+      <span class="text-lg font-normal">
+       /month
+      </span>
+     </div>
+     <ul class="mb-8 space-y-3 text-gray-600 flex-1">
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       SEO Ranking for up to 5 keywords
+      </li>
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       Social media posting (3 platforms)
+      </li>
+      <li>
+       <i class="fas fa-times text-red-500 mr-2">
+       </i>
+       Performance Analytics
+      </li>
+     </ul>
+     <button class="bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition">
+      Choose Basic
+     </button>
+    </div>
+    <div class="bg-white rounded-lg shadow p-8 flex flex-col border-4 border-blue-600">
+     <h4 class="text-2xl font-semibold mb-4 text-center">
+      Standard
+     </h4>
+     <p class="text-center text-gray-700 mb-6">
+      For growing businesses wanting more reach
+     </p>
+     <div class="text-center text-blue-600 font-extrabold text-4xl mb-6">
+      ₹12,000
+      <span class="text-lg font-normal">
+       /month
+      </span>
+     </div>
+     <ul class="mb-8 space-y-3 text-gray-600 flex-1">
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       SEO Ranking for up to 15 keywords
+      </li>
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       Social media management (5 platforms)
+      </li>
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       Monthly Performance Analytics
+      </li>
+     </ul>
+     <button class="bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition">
+      Choose Standard
+     </button>
+    </div>
+    <div class="bg-white rounded-lg shadow p-8 flex flex-col">
+     <h4 class="text-2xl font-semibold mb-4 text-center">
+      Premium
+     </h4>
+     <p class="text-center text-gray-700 mb-6">
+      Complete solution for large businesses
+     </p>
+     <div class="text-center text-blue-600 font-extrabold text-4xl mb-6">
+      ₹25,000
+      <span class="text-lg font-normal">
+       /month
+      </span>
+     </div>
+     <ul class="mb-8 space-y-3 text-gray-600 flex-1">
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       SEO Ranking for unlimited keywords
+      </li>
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       Full social media management &amp; advertising
+      </li>
+      <li>
+       <i class="fas fa-check text-green-500 mr-2">
+       </i>
+       Weekly Performance Analytics &amp; Reports
+      </li>
+     </ul>
+     <button class="bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition">
+      Choose Premium
+     </button>
+    </div>
+   </div>
+  </section>
+  <!-- Contact Section -->
+  <footer class="bg-white shadow-inner py-12 px-6 md:px-12 lg:px-24 mt-auto" id="contact">
+   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+    <div class="text-center md:text-left">
+     <h5 class="text-xl font-semibold text-gray-900 mb-2">
+      Contact Us
+     </h5>
+     <p class="text-gray-700">
+      Email: support@bizranker.com
+     </p>
+     <p class="text-gray-700">
+      Phone: +91 98765 43210
+     </p>
+     <p class="text-gray-700">
+      Address: 123 Business St, Mumbai, India
+     </p>
+    </div>
+    <div class="flex space-x-6 text-gray-700 text-2xl">
+     <a aria-label="Facebook" class="hover:text-blue-600 transition" href="https://facebook.com" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-facebook-square">
+      </i>
+     </a>
+     <a aria-label="Twitter" class="hover:text-blue-400 transition" href="https://twitter.com" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-twitter-square">
+      </i>
+     </a>
+     <a aria-label="LinkedIn" class="hover:text-blue-700 transition" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-linkedin">
+      </i>
+     </a>
+     <a aria-label="Instagram" class="hover:text-pink-600 transition" href="https://instagram.com" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-instagram-square">
+      </i>
+     </a>
+    </div>
+   </div>
+   <div class="mt-8 text-center text-gray-500 text-sm">
+    © 2024 BizRanker. All rights reserved.
+   </div>
+  </footer>
+  <script>
+   const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+ </body>
+</html>
